@@ -10,14 +10,15 @@ program
   .option('-v, --verify', 'verify that the project can be released')
   .option('-i, --install <version>', 'release a new version of the code locally')
   .option('-r, --release <version>', 'release a new version of the code to the public maven repo')
+  .option('-p, --pom', 'print pom file that can be used for typical release setup')
   .option('-n, --dry-run', 'show the commands that would be run, without actually running anything')
   .option('-d, --debug', 'print debugging information')
   .parse(process.argv);
 
-// // FIXME Proper error message if file not found.
-// // FIXME Add option to generate config file.
-// const configFile = fileio.glob("./*.release.json")[0];
-// const config = fileio.readJson(configFile);
+if(program.opts().pom) {
+  console.info("See Dropbox/programming/snippets/maven/pom.xml");
+  return 0;
+}
 
 let mode = "verify";
 let version = null;
