@@ -1,0 +1,26 @@
+{
+  "name": "java-release",
+  "version": "0.0.0",
+  "description": "Standard framework for releasing a java project.",
+  "main": "cli.js",
+  "bin": {
+    "java-release": "./cli.js"
+  },
+  "author": "folkforms",
+  "license": "MIT",
+  "scripts": {
+    "cli": "node cli.js",
+    "cli-test": "node cli.js --dry-run",
+    "release": "npm-release",
+    "test": "yarn jest"
+  },
+  "dependencies": {
+    "@folkforms/file-io": "^0.2.8",
+    "@folkforms/line-endings": "^0.0.11",
+    "@folkforms/npm-release": "^0.0.24",
+    "commander": "^8.3.0",
+    "dummy-shells": "^0.0.9",
+    "jest": "^27.4.5",
+    "shelljs": "^0.8.4"
+  }
+}
