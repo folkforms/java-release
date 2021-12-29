@@ -14,7 +14,7 @@ const checkIfVersionAlreadyExists = (shell, version) => {
   }
 
   if(throwError) {
-    throw new Error(`Version ${options.version} already exists.`);
+    throw new Error(`Version ${version} already exists.`);
   }
 }
 
