@@ -12,6 +12,7 @@ const checkIfVersionAlreadyExists = (shell, version) => {
   } catch (error) {
     console.debug(`DEBUG:     dependency:get did not find an existing version with that version number`);
     throwError = false;
+    r = 0;
   }
 
   if(throwError || r.code !== 0) {
