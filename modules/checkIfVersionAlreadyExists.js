@@ -1,22 +1,19 @@
-const checkIfVersionAlreadyExists = (shell, version) => {
-  console.debug(`DEBUG: checkIfVersionAlreadyExists:`);
-  // FIXME This needs to pull groupId and artifactId out of pom file
-  const cmd = `mvn dependency:get -Dartifact=folkforms:example:${version} > /dev/null 2>&1`;
-  let throwError = true;
-  let code = 1;
-  try {
-    console.debug(`DEBUG:     cmd = ${cmd}`);
-    code = shell.exec(cmd).code;
-    console.debug(`DEBUG:     dependency:get found an existing version with that version number`);
-    throwError = true;
-  } catch (error) {
-    console.debug(`DEBUG:     dependency:get did not find an existing version with that version number`);
-    throwError = false;
-    code = 0;
-  }
+const { XMLParser } = require("fast-xml-parser");
+const fileio = require("@folkforms/file-io");
 
-  if(throwError || code !== 0) {
-    throw new Error(`Version ${version} already exists.`);
+const checkIfVersionAlreadyExists = (shell, options) => {
+  console.debug(`DEBUG: checkIfVersionAlreadyExists:`);
+  const parser = new XMLParser();
+  const xml = parser.parse(fileio.readLinesAsString("pom.xml"));
+  const groupId = xml.project.groupId;
+  const artifactId = xml.project.artifactId;
+  const version = options.version;
+  const folder = `${process.env.MAVEN_REPO.replace(/\\/g, "/")}/${groupId.replace(/\./g, "/")}/${artifactId}/${version}`;
+  console.debug(`DEBUG:     folder = ${folder}`);
+  const glob = fileio.glob(`${folder}/*.jar`);
+  console.debug(`DEBUG:     glob = ${JSON.stringify(glob)}`);
+  if(glob.length > 0) {
+    throw new Error(`Version ${options.version} already exists.`);
   }
 }
 

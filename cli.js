@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { Command } = require("commander");
+const { Command, Option } = require("commander");
 const program = new Command();
 const shelljs = require("shelljs");
 const { dryRunShellJs } = require("dummy-shells");
@@ -13,6 +13,7 @@ program
   .option('-p, --pom', 'print pom file that can be used for typical release setup')
   .option('-n, --dry-run', 'show the commands that would be run, without actually running anything')
   .option('-d, --debug', 'print debugging information')
+  .addOption(new Option('--test-mode').hideHelp())
   .parse(process.argv);
 
 if(program.opts().pom) {
@@ -36,6 +37,7 @@ const options = {
   version,
   dryRun: program.opts().dryRun,
   debug: program.opts().debug,
+  testMode: program.opts().testMode,
 }
 
 const shell = program.opts().dryRun ? dryRunShellJs : shelljs;

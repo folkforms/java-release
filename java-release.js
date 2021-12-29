@@ -16,7 +16,7 @@ const javaRelease = (shellObj, optionsObj) => {
   validateEnvVars();
   switch(options.mode) {
     case "verify":
-      mavenVerify(shell);
+      mavenVerify(shell, options);
       break;
     case "install":
       mavenRelease("install", shell, options);

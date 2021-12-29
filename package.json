@@ -20,6 +20,7 @@
     "@folkforms/npm-release": "^0.0.25",
     "commander": "^8.3.0",
     "dummy-shells": "^0.0.9",
+    "fast-xml-parser": "^4.0.0-beta.8",
     "shelljs": "^0.8.4"
   }
 }
