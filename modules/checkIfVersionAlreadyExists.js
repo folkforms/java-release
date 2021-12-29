@@ -3,9 +3,10 @@ const checkIfVersionAlreadyExists = (shell, version) => {
   // FIXME This needs to pull groupId and artifactId out of pom file
   const cmd = `mvn dependency:get -Dartifact=folkforms:example:${version} > /dev/null 2>&1`;
   let throwError = true;
+  let r = 1;
   try {
     console.debug(`DEBUG:     cmd = ${cmd}`);
-    shell.exec(cmd);
+    r = shell.exec(cmd).code;
     console.debug(`DEBUG:     dependency:get found an existing version with that version number`);
     throwError = true;
   } catch (error) {
@@ -13,7 +14,7 @@ const checkIfVersionAlreadyExists = (shell, version) => {
     throwError = false;
   }
 
-  if(throwError) {
+  if(throwError || r.code !== 0) {
     throw new Error(`Version ${version} already exists.`);
   }
 }
