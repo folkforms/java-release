@@ -1,6 +1,6 @@
 {
   "name": "@folkforms/java-release",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Standard framework for releasing a java project.",
   "main": "cli.js",
   "bin": {
