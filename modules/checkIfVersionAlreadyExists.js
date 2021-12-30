@@ -1,7 +1,7 @@
 const { XMLParser } = require("fast-xml-parser");
 const fileio = require("@folkforms/file-io");
 
-const checkIfVersionAlreadyExists = (shell, options) => {
+const checkIfVersionAlreadyExists = (options) => {
   console.debug(`DEBUG: checkIfVersionAlreadyExists:`);
   const parser = new XMLParser();
   const xml = parser.parse(fileio.readLinesAsString("pom.xml"));

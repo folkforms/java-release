@@ -1,6 +1,7 @@
 const shellWrapper = require("./shell-wrapper");
 const validateEnvVars = require("./modules/validateEnvVars");
 const mavenVerify = require("./modules/mavenVerify");
+const checkIfVersionAlreadyExists = require("./modules/checkIfVersionAlreadyExists");
 const mavenRelease = require("./modules/mavenRelease");
 
 let shell;
@@ -14,9 +15,13 @@ const javaRelease = (shellObj, optionsObj) => {
   options = optionsObj;
 
   validateEnvVars();
+  if(options.testMode) { shell.cd("example"); }
   switch(options.mode) {
     case "verify":
       mavenVerify(shell, options);
+      break;
+    case "check":
+      checkIfVersionAlreadyExists(options);
       break;
     case "install":
       mavenRelease("install", shell, options);
@@ -25,6 +30,7 @@ const javaRelease = (shellObj, optionsObj) => {
       mavenRelease("deploy", shell, options);
       break;
   }
+  if(options.testMode) { shell.cd(".."); }
 
   return 0;
 }
