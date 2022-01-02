@@ -47,4 +47,5 @@ const options = {
 
 const shell = program.opts().dryRun ? dryRunShellJs : shelljs;
 
-return javaRelease(shell, options);
+const code = javaRelease(shell, options);
+process.exit(code);
