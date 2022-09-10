@@ -1,6 +1,7 @@
 const shellWrapper = require("./shell-wrapper");
 const validateEnvVars = require("./modules/validateEnvVars");
 const mavenVerify = require("./modules/mavenVerify");
+const mavenList = require("./modules/mavenList");
 const checkIfVersionAlreadyExists = require("./modules/checkIfVersionAlreadyExists");
 const mavenRelease = require("./modules/mavenRelease");
 
@@ -19,6 +20,9 @@ const javaRelease = (shellObj, optionsObj) => {
   switch(options.mode) {
     case "verify":
       mavenVerify(shell, options);
+      break;
+    case "list":
+      mavenList(shell, options);
       break;
     case "check":
       checkIfVersionAlreadyExists(options);

@@ -8,6 +8,7 @@ const javaRelease = require("./java-release");
 
 program
   .option('-v, --verify', 'verify that the project can be released')
+  .option('-l, --list', 'list existing releases in local maven repo')
   .option('-c, --check <version>', 'check if the given version already exists')
   .option('-i, --install <version>', 'release a new version of the code locally')
   .option('-r, --release <version>', 'release a new version of the code to the public maven repo')
@@ -24,6 +25,9 @@ if(program.opts().pom) {
 
 let mode = "verify";
 let version = null;
+if(program.opts().list) {
+  mode = "list";
+}
 if(program.opts().check) {
   mode = "check";
   version = program.opts().check;
