@@ -12,7 +12,7 @@ const checkIfVersionAlreadyExists = (options) => {
   console.debug(`DEBUG:     folder = ${folder}`);
   const glob = fileio.glob(`${folder}/*.jar`);
   console.debug(`DEBUG:     glob = ${JSON.stringify(glob)}`);
-  if(glob.length > 0) {
+  if(glob.length > 0 && !options.force) {
     throw new Error(`Version ${options.version} already exists.`);
   }
 }

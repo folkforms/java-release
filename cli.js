@@ -12,6 +12,7 @@ program
   .option('-c, --check <version>', 'check if the given version already exists')
   .option('-i, --install <version>', 'release a new version of the code locally')
   .option('-r, --release <version>', 'release a new version of the code to the public maven repo')
+  .option('-f, --force', 'override existing version, if any')
   .option('-p, --pom', 'print pom file that can be used for typical release setup')
   .option('-n, --dry-run', 'show the commands that would be run, without actually running anything')
   .option('-d, --debug', 'print debugging information')
@@ -44,6 +45,7 @@ if(program.opts().install) {
 const options = {
   mode,
   version,
+  force: program.opts().force,
   dryRun: program.opts().dryRun,
   debug: program.opts().debug,
   testMode: program.opts().testMode,
